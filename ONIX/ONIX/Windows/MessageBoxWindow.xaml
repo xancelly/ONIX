@@ -1,0 +1,187 @@
+﻿<Window x:Class="ONIX.Windows.MessageBoxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ONIX.Windows"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="MessageBoxWindow" Height="150" Width="450"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="{x:Null}">
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard>
+                <Storyboard FillBehavior="HoldEnd"
+                            AutoReverse="False">
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                     From="0"
+                                     To="1"
+                                     Duration="0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid>
+        <Grid x:Name="Body">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border BorderThickness="0.5"
+                    Background="#EAEBEC"
+                    CornerRadius="20"
+                    Grid.RowSpan="2"
+                    BorderBrush="#111111" />
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Margin="30,20,0,0.2"
+                                         Width="70"
+                                         Height="70"
+                                         x:Name="MessageIcon"/>
+                <TextBlock x:Name="TextView"
+                           TextWrapping="Wrap"
+                           Text="Text"
+                           Margin="10,20,0,0.2"
+                           FontSize="18"
+                           Foreground="#111111"
+                           HorizontalAlignment="Left"
+                           Width="330"
+                           Background="{x:Null}" />
+
+                <StackPanel Orientation="Vertical"
+                            Visibility="Collapsed"
+                            Margin="10,20,0,0.2"
+                            x:Name="ManufacturerPanel">
+                    <TextBlock Style="{StaticResource TextStyle}"
+                               Text="Добавление производителя"
+                               TextAlignment="Center"/>
+                    <ComboBox x:Name="CountryComboBox"
+                              Width="300"
+                              ToolTip="Страна производства"
+                              DisplayMemberPath="Name" />
+                    <TextBox x:Name="NameManufacturerInput"
+                             Width="300"
+                             materialDesign:HintAssist.Hint="Введите наименование производителя"
+                             MaxLength="50"
+                             ToolTip="Наименование производителя"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical"
+                            Visibility="Collapsed"
+                            Margin="10,20,0,0.2"
+                            x:Name="CategoryPanel">
+                    <TextBlock Style="{StaticResource TextStyle}"
+                               Text="Добавление категории товара"
+                               />
+                    <TextBox x:Name="NameCategoryInput"
+                             Width="300"
+                             materialDesign:HintAssist.Hint="Введите наименование категории"
+                             MaxLength="50"
+                             ToolTip="Наименование категории" />
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical"
+                            Visibility="Collapsed"
+                            Margin="10,20,0,0.2"
+                            x:Name="CountPanel">
+                    <TextBlock Style="{StaticResource TextStyle}" 
+                               x:Name="CountText"/>
+                    <TextBox x:Name="CountInput"
+                             Width="300"
+                             materialDesign:HintAssist.Hint="Введите количество"
+                             MaxLength="50"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical"
+                            Visibility="Collapsed"
+                            Margin="10,20,0,0.2"
+                            x:Name="TypeServicePanel">
+                    <TextBlock Style="{StaticResource TextStyle}"
+                               Text="Добавление категории услуги" />
+                    <TextBox x:Name="NameTypeServiceInput"
+                             Width="300"
+                             materialDesign:HintAssist.Hint="Введите наименование категории"
+                             MaxLength="50"
+                             ToolTip="Наименование категории" />
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical"
+                            Visibility="Collapsed"
+                            Margin="10,20,0,0.2"
+                            x:Name="ParametrPanel">
+                    <TextBlock Style="{StaticResource TextStyle}"
+                               Text="Добавление характеристики"
+                               TextAlignment="Center"
+                               x:Name="ParametrText" />
+                    <TextBox x:Name="NameParametrInput"
+                             Width="300"
+                             materialDesign:HintAssist.Hint="Введите наименование характеристики"
+                             MaxLength="50"
+                             ToolTip="Наименование характеристики" />
+                    <TextBox x:Name="DescriptionParametrInput"
+                             Width="300"
+                             materialDesign:HintAssist.Hint="Введите значение характеристики"
+                             MaxLength="100"
+                             ToolTip="Значение характеристики" />
+                </StackPanel>
+
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <Button x:Name="SaveButton"
+                        Style="{StaticResource MainButton}"
+                        Content="Сохранить"
+                        Visibility="Collapsed"
+                        Width="120"
+                        Height="30"
+                        Margin="10,0,10,10"
+                        Background="#27a843"
+                        Foreground="#EAEBEC"
+                        Click="ReturnValue"
+                        BorderBrush="#00FF" />
+                <Button x:Name="YesButton"
+                        Content="Да"
+                        Style="{StaticResource MainButton}"
+                        Visibility="Collapsed"
+                        Width="100"
+                        Height="30"
+                        Margin="10,0,10,10"
+                        Background="#27a843"
+                        Foreground="#EAEBEC"
+                        Click="ReturnValue_Click"
+                        Uid="1"
+                        BorderBrush="#00FF" />
+                <Button x:Name="NoButton"
+                        Content="Нет"
+                        Visibility="Collapsed"
+                        Width="100"
+                        Height="30"
+                        Style="{StaticResource MainButton}"
+                        Background="#27a843"
+                        Foreground="#EAEBEC"
+                        Margin="10,0,10,10"
+                        Click="ReturnValue_Click"
+                        HorizontalAlignment="Right"
+                        Uid="0"
+                        BorderBrush="#00FF" />
+                <Button x:Name="CancelButton"
+                        Content="Отмена"
+                        Visibility="Collapsed"
+                        Style="{StaticResource MainButton}"
+                        Width="120"
+                        Height="30"
+                        Click="ReturnValue_Click"
+                        Margin="10,0,10,10"
+                        Background="#27a843"
+                        Foreground="#EAEBEC"
+                        BorderBrush="#00FF" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

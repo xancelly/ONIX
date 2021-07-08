@@ -1,0 +1,311 @@
+﻿<Page x:Class="ONIX.Pages.SaleContractPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ONIX.Pages"
+      mc:Ignorable="d"
+      Loaded="Page_Loaded"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="545"
+      d:DesignWidth="1010"
+      Title="Договоры купли-продажи">
+
+    <Page.Resources>
+        <Storyboard x:Key="OpenFilter">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)"
+                                           Storyboard.TargetName="FilterGrid">
+                <EasingDoubleKeyFrame KeyTime="0"
+                                      Value="30" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2"
+                                      Value="250" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseFilter">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)"
+                                           Storyboard.TargetName="FilterGrid">
+                <EasingDoubleKeyFrame KeyTime="0"
+                                      Value="250" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1"
+                                      Value="30" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click"
+                      SourceName="OpenFilterButton">
+            <BeginStoryboard Storyboard="{StaticResource OpenFilter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click"
+                      SourceName="CloseFilterButton">
+            <BeginStoryboard Storyboard="{StaticResource CloseFilter}" />
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="0"
+                    Grid.Column="0">
+            <TextBlock Text="Поиск"
+                       Style="{StaticResource TextStyle}" />
+            <TextBox x:Name="SearchTextBox"
+                     TextChanged="SearchTextBox_TextChanged" />
+        </StackPanel>
+
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Grid.Row="2">
+            <TextBlock Width="Auto"
+                       Height="Auto"
+                       FontSize="12"
+                       Style="{StaticResource TextStyle}"
+                       x:Name="RecordsCountText" />
+        </StackPanel>
+
+        <DataGrid x:Name="SaleContractTable"
+                  Grid.Row="1"
+                  SelectionMode="Single"
+                  MouseRightButtonDown="SaleContractTable_MouseRightButtonDown"
+                  SelectionChanged="SaleContractTable_SelectionChanged"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№"
+                                    Width="*"
+                                    Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Дата"
+                                    Width="*"
+                                    Binding="{Binding Date}" />
+                <DataGridTextColumn Header="Статус"
+                                    Width="*"
+                                    Binding="{Binding Status.Name}" />
+                <DataGridTextColumn Header="Ответственный сотрудник"
+                                    Width="*"
+                                    Binding="{Binding GetEmployee}" />
+                <DataGridTextColumn Header="Организация"
+                                    Width="*"
+                                    Binding="{Binding GetOrganization}" />
+                <DataGridTextColumn Header="Адрес доставки"
+                                    Width="*"
+                                    Binding="{Binding DeliveryAddress}" />
+                <DataGridTextColumn Header="Сумма, руб. с НДС"
+                                    Width="*"
+                                    Binding="{Binding GetSumWithNDS}" />
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Изменить статус"
+                              x:Name="ChangeStatus">
+                        <MenuItem Header="Черновик" 
+                                  x:Name="DraftStatus"
+                                  Click="DraftStatus_Click"/>
+                        <MenuItem Header="В обработке" 
+                                  x:Name="ProcessStatus"
+                                  Click="ProcessStatus_Click"/>
+                        <MenuItem Header="Завершён"
+                                  x:Name="ComplitedStatus"
+                                  Click="ComplitedStatus_Click"/>
+                    </MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Grid.Row="1"
+                    Margin="0,0,20,20">
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    BorderBrush="#00FF"
+                    Margin="5"
+                    x:Name="PrintDocumentButton"
+                    Background="#FFFFB400"
+                    Click="PrintDocumentButton_Click">
+                <materialDesign:PackIcon Kind="Printer"
+                                         Width="30"
+                                         Height="30" />
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Печать договора купли-продажи"
+                                  x:Name="PrintContract"
+                                  Click="PrintContract_Click"/>
+                        <MenuItem Header="Печать спецификации к договору купли-продажи"
+                                  x:Name="PrintSpecification"
+                                  Click="PrintSpecification_Click"/>
+                        <MenuItem Header="Печать расходной накладной"
+                                  x:Name="PrintInvoice"
+                                  Click="PrintInvoice_Click"/>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    BorderBrush="#00FF"
+                    Margin="5"
+                    x:Name="DeleteButton"
+                    Background="#FF0000"
+                    Click="DeleteButton_Click">
+                <materialDesign:PackIcon Kind="Delete"
+                                         Width="30"
+                                         Height="30" />
+            </Button>
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    Background="#0099CC"
+                    Margin="5"
+                    x:Name="EditButton"
+                    BorderBrush="#00FF"
+                    Click="EditButton_Click">
+                <materialDesign:PackIcon Kind="Edit"
+                                         Width="30"
+                                         Height="30" />
+            </Button>
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    BorderBrush="#00FF"
+                    Margin="5"
+                    Background="#27a843"
+                    x:Name="AddButton"
+                    Click="AddButton_Click">
+                <materialDesign:PackIcon Kind="Add"
+                                         Width="30"
+                                         Height="30" />
+            </Button>
+        </StackPanel>
+
+        <Grid x:Name="FilterGrid"
+              Width="30"
+              Background="#EAEBEC"
+              VerticalAlignment="Top"
+              Grid.Row="0"
+              Grid.Column="0"
+              HorizontalAlignment="Right"
+              Grid.ColumnSpan="2"
+              Grid.RowSpan="3">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="1"
+                                  ShadowDepth="1"
+                                  Color="LightGray" />
+            </Grid.Effect>
+
+
+            <StackPanel>
+                <Border BorderBrush="LightGray"
+                        BorderThickness="1">
+                    <Grid Height="545"
+                          RenderTransformOrigin="0.5,0.5">
+                        <Grid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Grid.RenderTransform>
+
+                        <StackPanel Orientation="Vertical">
+
+                            <Button x:Name="OpenFilterButton"
+                                    Height="50"
+                                    Width="30"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                    Background="{x:Null}"
+                                    BorderThickness="2"
+                                    BorderBrush="{x:Null}"
+                                    Foreground="#111111"
+                                    Click="OpenFilterButton_Click">
+                                <materialDesign:PackIcon Kind="Filter"
+                                                         Width="18"
+                                                         Height="18" />
+                            </Button>
+                            <Button x:Name="CloseFilterButton"
+                                    Visibility="Collapsed"
+                                    Height="50"
+                                    Width="30"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                    BorderBrush="{x:Null}"
+                                    Foreground="#111111"
+                                    Background="{x:Null}"
+                                    Click="CloseFilterButton_Click">
+                                <materialDesign:PackIcon Kind="FilterMinus"
+                                                         Width="18"
+                                                         Height="18" />
+                            </Button>
+
+                            <StackPanel Orientation="Vertical"
+                                        x:Name="FilterFields"
+                                        Visibility="Collapsed">
+                                <TextBlock Text="Статус"
+                                           Style="{StaticResource TextStyle}" />
+                                <ComboBox x:Name="StatusComboBox"
+                                          SelectionChanged="StatusComboBox_SelectionChanged"
+                                          DisplayMemberPath="Name" />
+                                <TextBlock Text="Контрагент"
+                                           Style="{StaticResource TextStyle}" />
+                                <ComboBox x:Name="OrganizationComboBox"
+                                          DisplayMemberPath="Name"
+                                          SelectionChanged="OrganizationComboBox_SelectionChanged" />
+                                <TextBlock Text="Сумма договора"
+                                           Style="{StaticResource TextStyle}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox  x:Name="PriceFromInput"
+                                              Width="114"
+                                              MaxLength="10"
+                                              ToolTip="Минимальная цена"
+                                              PreviewTextInput="PriceFromInput_PreviewTextInput"
+                                              HorizontalAlignment="Left"
+                                              TextChanged="PriceFromInput_TextChanged" />
+                                    <TextBox  x:Name="PriceToInput"
+                                              Width="114"
+                                              MaxLength="10"
+                                              ToolTip="Максимальная цена"
+                                              HorizontalAlignment="Right"
+                                              PreviewTextInput="PriceToInput_PreviewTextInput"
+                                              TextChanged="PriceToInput_TextChanged" />
+                                </StackPanel>
+                                <TextBlock Text="Период"
+                                           Style="{StaticResource TextStyle}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <DatePicker  x:Name="DateFromInput"
+                                              Width="114"
+                                              ToolTip="Период с" 
+                                                SelectedDateChanged="DateFromInput_SelectedDateChanged"/>
+                                    <DatePicker  x:Name="DateToInput"
+                                              Width="114"
+                                              ToolTip="Период по"
+                                                 SelectedDateChanged="DateToInput_SelectedDateChanged"/>
+                                </StackPanel>
+                                <Button x:Name="ClearButton"
+                                        Content="Сброс"
+                                        Style="{StaticResource MainButton}"
+                                        Click="ClearButton_Click"
+                                        BorderBrush="#00FF"
+                                        Margin="15" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="2"
+                    HorizontalAlignment="Right" />
+    </Grid>
+</Page>

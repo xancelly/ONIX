@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ONIX_DATABASEModelContainer" CdmEntityContainer="ONIX_DATABASEEntities">
+    <EntitySetMapping Name="BankAccount">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.BankAccount">
+        <MappingFragment StoreEntitySet="BankAccount">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CorrespondentAccount" ColumnName="CorrespondentAccount" />
+          <ScalarProperty Name="BIK" ColumnName="BIK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Category">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Country">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PreviewImage" ColumnName="PreviewImage" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExpenceInvoice">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.ExpenceInvoice">
+        <MappingFragment StoreEntitySet="ExpenceInvoice">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+          <ScalarProperty Name="IdSaleContract" ColumnName="IdSaleContract" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExpenceInvoiceSpecification">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.ExpenceInvoiceSpecification">
+        <MappingFragment StoreEntitySet="ExpenceInvoiceSpecification">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdGood" ColumnName="IdGood" />
+          <ScalarProperty Name="IdExpenceInvoice" ColumnName="IdExpenceInvoice" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Good">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.Good">
+        <MappingFragment StoreEntitySet="Good">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdManufacturer" ColumnName="IdManufacturer" />
+          <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Sertificate" ColumnName="Sertificate" />
+          <ScalarProperty Name="TechnicalDataSheet" ColumnName="TechnicalDataSheet" />
+          <ScalarProperty Name="Instruction" ColumnName="Instruction" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="PreviewImage" ColumnName="PreviewImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoodNDS">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.GoodNDS">
+        <MappingFragment StoreEntitySet="GoodNDS">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdGood" ColumnName="IdGood" />
+          <ScalarProperty Name="NDS" ColumnName="NDS" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoodPrice">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.GoodPrice">
+        <MappingFragment StoreEntitySet="GoodPrice">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdGood" ColumnName="IdGood" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Manufacturer">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.Manufacturer">
+        <MappingFragment StoreEntitySet="Manufacturer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CodeCountry" ColumnName="CodeCountry" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Organization">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.Organization">
+        <MappingFragment StoreEntitySet="Organization">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdBankAccount" ColumnName="IdBankAccount" />
+          <ScalarProperty Name="IdTypeOrganization" ColumnName="IdTypeOrganization" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="INN" ColumnName="INN" />
+          <ScalarProperty Name="KPP" ColumnName="KPP" />
+          <ScalarProperty Name="OKPO" ColumnName="OKPO" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PhysicalAddress" ColumnName="PhysicalAddress" />
+          <ScalarProperty Name="BusinessAddress" ColumnName="BusinessAddress" />
+          <ScalarProperty Name="PaymentAccount" ColumnName="PaymentAccount" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parameter">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.Parameter">
+        <MappingFragment StoreEntitySet="Parameter">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdGood" ColumnName="IdGood" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SaleContract">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.SaleContract">
+        <MappingFragment StoreEntitySet="SaleContract">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+          <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+          <ScalarProperty Name="IdOrganization" ColumnName="IdOrganization" />
+          <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SaleContractSpecification">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.SaleContractSpecification">
+        <MappingFragment StoreEntitySet="SaleContractSpecification">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdGood" ColumnName="IdGood" />
+          <ScalarProperty Name="IdSaleContract" ColumnName="IdSaleContract" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Service">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.Service">
+        <MappingFragment StoreEntitySet="Service">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdTypeService" ColumnName="IdTypeService" />
+          <ScalarProperty Name="PreviewImage" ColumnName="PreviewImage" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceContract">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.ServiceContract">
+        <MappingFragment StoreEntitySet="ServiceContract">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+          <ScalarProperty Name="IdOrganization" ColumnName="IdOrganization" />
+          <ScalarProperty Name="ServiceAddress" ColumnName="ServiceAddress" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+          <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceContractSpecification">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.ServiceContractSpecification">
+        <MappingFragment StoreEntitySet="ServiceContractSpecification">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdService" ColumnName="IdService" />
+          <ScalarProperty Name="IdServiceContract" ColumnName="IdServiceContract" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceNDS">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.ServiceNDS">
+        <MappingFragment StoreEntitySet="ServiceNDS">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdService" ColumnName="IdService" />
+          <ScalarProperty Name="NDS" ColumnName="NDS" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServicePrice">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.ServicePrice">
+        <MappingFragment StoreEntitySet="ServicePrice">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdService" ColumnName="IdService" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeOrganization">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.TypeOrganization">
+        <MappingFragment StoreEntitySet="TypeOrganization">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeService">
+      <EntityTypeMapping TypeName="ONIX_DATABASEModel.TypeService">
+        <MappingFragment StoreEntitySet="TypeService">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

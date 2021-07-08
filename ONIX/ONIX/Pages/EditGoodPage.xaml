@@ -1,0 +1,498 @@
+﻿<Page x:Class="ONIX.Pages.EditGoodPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ONIX.Pages"
+      mc:Ignorable="d"
+      Unloaded="Page_Unloaded"
+      d:DesignHeight="545"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignWidth="1010"
+      Title="Просмотр товара">
+
+    <Grid>
+        <!--Просмотр товара-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      x:Name="ShowGoodPanel"
+                      Visibility="Collapsed">
+            <Grid x:Name="PrintGrid">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/ONIX;component/Resources/noimage.png"
+                               Width="350"
+                               x:Name="PreviewImage"
+                               Height="350"
+                               Margin="20"
+                               HorizontalAlignment="Left" />
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Style="{StaticResource TextStyle}"
+                                       Width="550"
+                                       Height="80"
+                                       FontSize="25"
+                                       FontWeight="Bold"
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Top"
+                                       Margin="20"
+                                       x:Name="NameText" />
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        Width="550"
+                                        Height="Auto"
+                                        FontSize="17"
+                                        TextWrapping="Wrap"
+                                        VerticalAlignment="Top"
+                                        Margin="5"
+                                        x:Name="DescriptionText" />
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        Width="550"
+                                        Height="Auto"
+                                        FontSize="17"
+                                        TextWrapping="Wrap"
+                                        VerticalAlignment="Top"
+                                        Margin="5"
+                                        x:Name="CountryText" />
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        Width="550"
+                                        Height="Auto"
+                                        FontSize="17"
+                                        TextWrapping="Wrap"
+                                        VerticalAlignment="Top"
+                                        Margin="5"
+                                        x:Name="ManufacturerText" />
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        Width="550"
+                                        Height="Auto"
+                                        FontSize="17"
+                                        TextWrapping="Wrap"
+                                        VerticalAlignment="Top"
+                                        Margin="5"
+                                        x:Name="CategoryText" />
+                            <StackPanel Orientation="Horizontal"
+                                        x:Name="SertificatePanel">
+                                <TextBlock  Style="{StaticResource TextStyle}"
+                                            Width="Auto"
+                                            Height="Auto"
+                                            FontSize="17"
+                                            Text="Сертификат качество:"
+                                            TextWrapping="Wrap"
+                                            VerticalAlignment="Top"
+                                            Margin="20,5,5,5"
+                                            x:Name="SertificateText" />
+                                <TextBlock  Style="{StaticResource TextStyle}"
+                                            Width="Auto"
+                                            Height="Auto"
+                                            FontSize="17"
+                                            TextWrapping="Wrap"
+                                            TextDecorations="Underline"
+                                            VerticalAlignment="Top"
+                                            Margin="5">
+                            <Hyperlink x:Name="SertificateLink"
+                                       Click="SertificateLink_Click">Скачать</Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        x:Name="TechnicalDataSheetPanel">
+                                <TextBlock  Style="{StaticResource TextStyle}"
+                                            Width="Auto"
+                                            Height="Auto"
+                                            Text="Технический паспорт:"
+                                            FontSize="17"
+                                            TextWrapping="Wrap"
+                                            VerticalAlignment="Top"
+                                            Margin="20,5,5,5"
+                                            x:Name="TechnicalDataSheetText" />
+                                <TextBlock  Style="{StaticResource TextStyle}"
+                                            Width="Auto"
+                                            Height="Auto"
+                                            FontSize="17"
+                                            TextWrapping="Wrap"
+                                            TextDecorations="Underline"
+                                            VerticalAlignment="Top"
+                                            Margin="5">
+                            <Hyperlink x:Name="TechnicalDataSheetLink"
+                                       Click="TechnicalDataSheetLink_Click">Скачать</Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        x:Name="InstructionPanel">
+                                <TextBlock  Style="{StaticResource TextStyle}"
+                                            Width="Auto"
+                                            Height="Auto"
+                                            Text="Инструкция по эксплуатации:"
+                                            FontSize="17"
+                                            TextWrapping="Wrap"
+                                            VerticalAlignment="Top"
+                                            Margin="20,5,5,5"
+                                            x:Name="InstructionText" />
+                                <TextBlock  Style="{StaticResource TextStyle}"
+                                            Width="Auto"
+                                            Height="Auto"
+                                            TextDecorations="Underline"
+                                            FontSize="17"
+                                            TextWrapping="Wrap"
+                                            VerticalAlignment="Top"
+                                            Margin="5">
+                            <Hyperlink x:Name="InstructionLink"
+                                       Click="InstructionLink_Click">Скачать</Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        Width="550"
+                                        Height="Auto"
+                                        FontSize="17"
+                                        TextWrapping="Wrap"
+                                        VerticalAlignment="Top"
+                                        Margin="5"
+                                        x:Name="PriceText" />
+
+                        </StackPanel>
+                    </StackPanel>
+                    <DataGrid x:Name="ParametrDataGrid"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              Margin="20"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Характеристика"
+                                                Width="*"
+                                                Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="Значение"
+                                                Width="*"
+                                                Binding="{Binding Description}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <!--Добавление/Редактирование товара-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      x:Name="EditGoodPanel"
+                      Visibility="Collapsed">
+            <Grid>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top">
+                        <Image Width="350"
+                               x:Name="EditPreviewImage"
+                               Height="350"
+                               Margin="20" />
+                        <Button x:Name="AddPhotoButton"
+                                Content="Добавить фото"
+                                Background="#111111"
+                                BorderBrush="#111111"
+                                Click="AddPhotoButton_Click" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical">
+                        <TextBox Width="550"
+                                 materialDesign:HintAssist.Hint="Введите название товара"
+                                 Height="Auto"
+                                 FontSize="25"
+                                 ToolTip="Название товара"
+                                 FontWeight="Bold"
+                                 TextWrapping="Wrap"
+                                 VerticalAlignment="Top"
+                                 Margin="20"
+                                 x:Name="NameInput"
+                                 MaxLength="100" />
+                        <TextBox Width="550"
+                                 materialDesign:HintAssist.Hint="Введите описание товара"
+                                 Height="Auto"
+                                 FontSize="17"
+                                 MaxLength="1000"
+                                 ToolTip="Описание товара"
+                                 TextWrapping="Wrap"
+                                 VerticalAlignment="Top"
+                                 Margin="5"
+                                 x:Name="DescriptionInput" />
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox  Width="505"
+                                       ToolTip="Категория товара"
+                                       FontSize="17"
+                                       VerticalAlignment="Top"
+                                       Margin="20,20,5,5"
+                                       x:Name="CategoryComboBox"
+                                       DisplayMemberPath="Name" />
+                            <Button x:Name="AddCategory"
+                                    Width="40"
+                                    Background="#27a843"
+                                    Height="40"
+                                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                    BorderBrush="#00FF"
+                                    Click="AddCategory_Click">
+                                <materialDesign:PackIcon Kind="Add"
+                                                         Width="30"
+                                                         Height="30" />
+                            </Button>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox  Width="505"
+                                       FontSize="17"
+                                       ToolTip="Производитель товара"
+                                       VerticalAlignment="Top"
+                                       Margin="20,5,5,5"
+                                       DisplayMemberPath="Name"
+                                       x:Name="ManufacturerComboBox" />
+                            <Button x:Name="AddManufacturer"
+                                    Width="40"
+                                    Background="#27a843"
+                                    Height="40"
+                                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                    BorderBrush="#00FF"
+                                    Click="AddManufacturer_Click">
+                                <materialDesign:PackIcon Kind="Add"
+                                                         Width="30"
+                                                         Height="30" />
+                            </Button>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        FontSize="17"
+                                        Width="260"
+                                        Text="Сертификат качества:"
+                                        TextWrapping="Wrap"
+                                        VerticalAlignment="Top"
+                                        Margin="20,5,5,5" />
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        FontSize="17"
+                                        x:Name="SertificateButton_1"
+                                        Width="Auto"
+                                        TextWrapping="Wrap"
+                                        TextDecorations="Underline"
+                                        VerticalAlignment="Top">
+                                <Hyperlink x:Name="SertificateSave"
+                                           Click="SertificateSave_Click">Скачать</Hyperlink>
+                            </TextBlock>
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        FontSize="17"
+                                        Width="Auto"
+                                        TextWrapping="Wrap"
+                                        TextDecorations="Underline"
+                                        VerticalAlignment="Top">
+                                <Hyperlink x:Name="SertificateLoad"
+                                           Click="SertificateLoad_Click">Загрузить</Hyperlink>
+                            </TextBlock>
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        FontSize="17"
+                                        Width="Auto"
+                                        TextWrapping="Wrap"
+                                        x:Name="SertificateButton_2"
+                                        TextDecorations="Underline"
+                                        VerticalAlignment="Top">
+                                <Hyperlink x:Name="SertificateDelete"
+                                           Click="SertificateDelete_Click">Удалить</Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        FontSize="17"
+                                        Text="Технический паспорт:"
+                                        TextWrapping="Wrap"
+                                        Width="260"
+                                        VerticalAlignment="Top"
+                                        Margin="20,5,5,5" />
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        FontSize="17"
+                                        Width="Auto"
+                                        TextWrapping="Wrap"
+                                        x:Name="TechnicalDataSheetButton_1"
+                                        TextDecorations="Underline"
+                                        VerticalAlignment="Top">
+                                <Hyperlink x:Name="TechnicalDataSheetSave"
+                                           Click="TechnicalDataSheetSave_Click">Скачать</Hyperlink>
+                            </TextBlock>
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        FontSize="17"
+                                        Width="Auto"
+                                        TextWrapping="Wrap"
+                                        TextDecorations="Underline"
+                                        VerticalAlignment="Top">
+                                <Hyperlink x:Name="TechnicalDataSheetLoad"
+                                           Click="TechnicalDataSheetLoad_Click">Загрузить</Hyperlink>
+                            </TextBlock>
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        FontSize="17"
+                                        Width="Auto"
+                                        TextWrapping="Wrap"
+                                        x:Name="TechnicalDataSheetButton_2"
+                                        TextDecorations="Underline"
+                                        VerticalAlignment="Top">
+                                <Hyperlink x:Name="TechnicalDataSheetDelete"
+                                           Click="TechnicalDataSheetDelete_Click">Удалить</Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        FontSize="17"
+                                        Text="Инструкция по эксплуатации:"
+                                        Width="260"
+                                        TextWrapping="Wrap"
+                                        VerticalAlignment="Top"
+                                        Margin="20,5,5,5" />
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        FontSize="17"
+                                        Width="Auto"
+                                        x:Name="InstructionButton_1"
+                                        TextWrapping="Wrap"
+                                        TextDecorations="Underline"
+                                        VerticalAlignment="Top">
+                                <Hyperlink x:Name="InstructionSave"
+                                           Click="InstructionSave_Click">Скачать</Hyperlink>
+                            </TextBlock>
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        FontSize="17"
+                                        Width="Auto"
+                                        TextWrapping="Wrap"
+                                        TextDecorations="Underline"
+                                        VerticalAlignment="Top">
+                                <Hyperlink x:Name="InstructionLoad"
+                                           Click="InstructionLoad_Click">Загрузить</Hyperlink>
+                            </TextBlock>
+                            <TextBlock  Style="{StaticResource TextStyle}"
+                                        FontSize="17"
+                                        Width="Auto"
+                                        TextWrapping="Wrap"
+                                        x:Name="InstructionButton_2"
+                                        TextDecorations="Underline"
+                                        VerticalAlignment="Top">
+                                <Hyperlink x:Name="InstructionDelete"
+                                           Click="InstructionDelete_Click">Удалить</Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                        <TextBox    Width="550"
+                                    Height="Auto"
+                                    FontSize="17"
+                                    ToolTip="Цена товара"
+                                    TextWrapping="Wrap"
+                                    VerticalAlignment="Top"
+                                    Margin="5"
+                                    x:Name="PriceInput"
+                                    materialDesign:HintAssist.Hint="Введите цену" />
+                        <TextBox    Width="550"
+                                    Height="Auto"
+                                    FontSize="17"
+                                    ToolTip="НДС товара"
+                                    TextWrapping="Wrap"
+                                    VerticalAlignment="Top"
+                                    Margin="5"
+                                    x:Name="NDSInput"
+                                    materialDesign:HintAssist.Hint="Введите НДС" />
+
+                    </StackPanel>
+                </StackPanel>
+                <DataGrid x:Name="EditParametrDataGrid"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          Margin="20"
+                          IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Характеристика"
+                                            Width="*"
+                                            Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Значение"
+                                            Width="*"
+                                            Binding="{Binding Description}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Margin="5,5,20,5">
+                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                            BorderBrush="#00FF"
+                            Margin="5"
+                            x:Name="DeleteButton"
+                            Background="#FF0000"
+                            Click="DeleteButton_Click">
+                        <materialDesign:PackIcon Kind="Delete"
+                                                 Width="30"
+                                                 Height="30" />
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                            Background="#0099CC"
+                            Margin="5"
+                            x:Name="EditButton"
+                            BorderBrush="#00FF"
+                            Click="EditButton_Click">
+                        <materialDesign:PackIcon Kind="Edit"
+                                                 Width="30"
+                                                 Height="30" />
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                            BorderBrush="#00FF"
+                            Margin="5"
+                            Background="#27a843"
+                            x:Name="AddButton"
+                            Click="AddButton_Click">
+                        <materialDesign:PackIcon Kind="Add"
+                                                 Width="30"
+                                                 Height="30" />
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            </Grid>
+        </ScrollViewer>
+        
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="BackButton"
+                    Style="{StaticResource MaterialDesignIconButton}"
+                    HorizontalAlignment="Left"
+                    Foreground="#00FF"
+                    Background="#00FF"
+                    BorderBrush="#00FF"
+                    VerticalAlignment="Top"
+                    Margin="5,5,0,0"
+                    Width="30"
+                    Height="30"
+                    Click="BackButton_Click">
+                <materialDesign:PackIcon Kind="ArrowBack"
+                                         Foreground="#111111"
+                                         Width="30"
+                                         Height="30" />
+            </Button>
+            <Button x:Name="SaveButton"
+                    Style="{StaticResource MaterialDesignIconButton}"
+                    HorizontalAlignment="Left"
+                    Foreground="#00FF"
+                    Background="#00FF"
+                    BorderBrush="#00FF"
+                    VerticalAlignment="Top"
+                    Margin="5,5,0,0"
+                    Width="30"
+                    Height="30"
+                    Click="SaveButton_Click">
+                <materialDesign:PackIcon Kind="ContentSave" 
+                                         Foreground="#111111"
+                                         Width="30"
+                                         Height="30" />
+            </Button>
+            <Button x:Name="PrintButton"
+                    Style="{StaticResource MaterialDesignIconButton}"
+                    HorizontalAlignment="Left"
+                    Foreground="#00FF"
+                    Visibility="Collapsed"
+                    Background="#00FF"
+                    BorderBrush="#00FF"
+                    VerticalAlignment="Top"
+                    Margin="5,5,0,0"
+                    Width="30"
+                    Height="30"
+                    Click="PrintButton_Click">
+                <materialDesign:PackIcon Kind="Printer"
+                                         Foreground="#111111"
+                                         Width="30"
+                                         Height="30" />
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</Page>

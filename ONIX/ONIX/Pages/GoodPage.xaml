@@ -1,0 +1,281 @@
+﻿<Page x:Class="ONIX.Pages.GoodPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ONIX.Pages"
+      mc:Ignorable="d"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:s="clr-namespace:System;assembly=mscorlib"
+      d:DesignHeight="545"
+      Loaded="Page_Loaded"
+      d:DesignWidth="1010"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      Title="Товары">
+
+    <Page.Resources>
+        <Storyboard x:Key="OpenFilter">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)"
+                                           Storyboard.TargetName="FilterGrid">
+                <EasingDoubleKeyFrame KeyTime="0"
+                                      Value="30" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2"
+                                      Value="250" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseFilter">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)"
+                                           Storyboard.TargetName="FilterGrid">
+                <EasingDoubleKeyFrame KeyTime="0"
+                                      Value="250" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1"
+                                      Value="30" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click"
+                      SourceName="OpenFilterButton">
+            <BeginStoryboard Storyboard="{StaticResource OpenFilter}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click"
+                      SourceName="CloseFilterButton">
+            <BeginStoryboard Storyboard="{StaticResource CloseFilter}" />
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="0"
+                    Grid.Column="0">
+            <Button x:Name="BackButton"
+                    Click="BackButton_Click"
+                    Foreground="#111111"
+                    Visibility="Collapsed"
+                    Style="{StaticResource MaterialDesignIconButton}">
+                <materialDesign:PackIcon Width="30"
+                                         Height="30"
+                                         Kind="ArrowBack"/>
+            </Button>
+            <TextBlock Text="Поиск"
+                       Style="{StaticResource TextStyle}" />
+            <TextBox x:Name="SearchTextBox"
+                     TextChanged="SearchTextBox_TextChanged" />
+        </StackPanel>
+
+        <ListView Grid.Row="1"
+                  x:Name="GoodListView"
+                  Grid.Column="0"
+                  MouseDoubleClick="GoodListView_MouseDoubleClick"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical"
+                                Width="160"
+                                Height="280"
+                                Margin="5">
+                        <Image Margin="5"
+                               Width="150"
+                               Height="150"
+                               Source="{Binding GetImage}" />
+                        <TextBlock Style="{StaticResource TextStyle}"
+                                   Width="Auto"
+                                   Height="70"
+                                   FontSize="12"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   Margin="5"
+                                   Text="{Binding Name}" />
+                        <TextBlock Style="{StaticResource TextStyle}"
+                                   Width="Auto"
+                                   TextAlignment="Center"
+                                   FontWeight="Bold"
+                                   Height="30"
+                                   Margin="5"
+                                   Text="{Binding GetLastPrice}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Grid.Row="2">
+            <TextBlock Width="Auto"
+                       Height="Auto"
+                       FontSize="12"
+                       Style="{StaticResource TextStyle}"
+                       x:Name="RecordsCountText" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    Margin="0,0,70,50">
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    BorderBrush="#00FF"
+                    Margin="5"
+                    x:Name="DeleteButton"
+                    Background="#FF0000"
+                    Click="DeleteButton_Click">
+                <materialDesign:PackIcon Kind="Delete"
+                                         Width="30"
+                                         Height="30" />
+            </Button>
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    Background="#0099CC"
+                    Margin="5"
+                    x:Name="EditButton"
+                    BorderBrush="#00FF"
+                    Click="EditButton_Click">
+                <materialDesign:PackIcon Kind="Edit"
+                                         Width="30"
+                                         Height="30" />
+            </Button>
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    BorderBrush="#00FF"
+                    Margin="5"
+                    Background="#27a843"
+                    x:Name="AddButton"
+                    Click="AddButton_Click">
+                <materialDesign:PackIcon Kind="Add"
+                                         Width="30"
+                                         Height="30" />
+            </Button>
+        </StackPanel>
+
+
+        <Grid x:Name="FilterGrid"
+              Width="30"
+              Background="#EAEBEC"
+              VerticalAlignment="Top"
+              Grid.Row="0"
+              Grid.Column="0"
+              HorizontalAlignment="Right"
+              Grid.ColumnSpan="2"
+              Grid.RowSpan="3">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="1"
+                                  ShadowDepth="1"
+                                  Color="LightGray" />
+            </Grid.Effect>
+
+
+            <StackPanel>
+                <Border BorderBrush="LightGray"
+                        BorderThickness="1">
+                    <Grid Height="545"
+                          RenderTransformOrigin="0.5,0.5">
+                        <Grid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Grid.RenderTransform>
+
+                        <StackPanel Orientation="Vertical">
+
+                            <Button x:Name="OpenFilterButton"
+                                    Height="50"
+                                    Width="30"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                    Background="{x:Null}"
+                                    BorderThickness="2"
+                                    BorderBrush="{x:Null}"
+                                    Foreground="#111111"
+                                    Click="OpenFilterButton_Click">
+                                <materialDesign:PackIcon Kind="Filter"
+                                                         Width="18"
+                                                         Height="18" />
+                            </Button>
+                            <Button x:Name="CloseFilterButton"
+                                    Visibility="Collapsed"
+                                    Height="50"
+                                    Width="30"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                    BorderBrush="{x:Null}"
+                                    Foreground="#111111"
+                                    Background="{x:Null}"
+                                    Click="CloseFilterButton_Click">
+                                <materialDesign:PackIcon Kind="FilterMinus"
+                                                         Width="18"
+                                                         Height="18" />
+                            </Button>
+
+                            <StackPanel Orientation="Vertical"
+                                        x:Name="FilterFields"
+                                        Visibility="Collapsed">
+                                <TextBlock Text="Категория"
+                                           Style="{StaticResource TextStyle}" />
+                                <ComboBox x:Name="CategoryComboBox"
+                                          SelectionChanged="CategoryComboBox_SelectionChanged"
+                                          DisplayMemberPath="Name" />
+                                <TextBlock Text="Производитель"
+                                           Style="{StaticResource TextStyle}" />
+                                <ComboBox x:Name="ManufacturerComboBox"
+                                          DisplayMemberPath="Name"
+                                          SelectionChanged="ManufacturerComboBox_SelectionChanged" />
+                                <TextBlock Text="Цена"
+                                           Style="{StaticResource TextStyle}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox  x:Name="PriceFromInput"
+                                                         Width="114"
+                                                         MaxLength="10"
+                                                         ToolTip="Минимальная цена"
+                                                         PreviewTextInput="PriceFromInput_PreviewTextInput"
+                                                         HorizontalAlignment="Left"
+                                                         TextChanged="PriceFromInput_TextChanged" />
+                                    <TextBox  x:Name="PriceToInput"
+                                                         Width="114"
+                                                         MaxLength="10"
+                                                         ToolTip="Максимальная цена"
+                                                         HorizontalAlignment="Right"
+                                                         PreviewTextInput="PriceToInput_PreviewTextInput"
+                                                         TextChanged="PriceToInput_TextChanged" />
+                                </StackPanel>
+                                <Button x:Name="PriceListButton"
+                                        Content="Печать прайс-листа"
+                                        BorderBrush="#00FF"
+                                        Style="{StaticResource MainButton}"
+                                        Margin="15"
+                                        Click="PriceListButton_Click" />
+                                <Button x:Name="ClearButton"
+                                        Content="Сброс"
+                                        Click="ClearButton_Click"
+                                        Style="{StaticResource MainButton}"
+                                        BorderBrush="#00FF"
+                                        Margin="15"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

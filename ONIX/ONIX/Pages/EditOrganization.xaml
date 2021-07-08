@@ -1,0 +1,173 @@
+﻿<Page x:Class="ONIX.Pages.EditOrganization"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:ONIX.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="545"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      d:DesignWidth="1010"
+      Title="Добавление контрагента">
+
+    <Grid>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal"
+                            Margin="5">
+                <TextBlock Style="{StaticResource TextStyle}"
+                           Text="Тип организации"/>
+                <ComboBox x:Name="TypeOrganizationComboBox"
+                          DisplayMemberPath="FullName"/>
+            </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="5">
+                <TextBlock Style="{StaticResource TextStyle}"
+                           Text="Наименование организации" />
+                <TextBox x:Name="NameInput"
+                         MaxLength="100"/>
+            </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="5">
+                <TextBlock Style="{StaticResource TextStyle}"
+                           Text="Контактное лицо" />
+                <TextBox x:Name="ContactPersonInput" 
+                         MaxLength="150"
+                         PreviewTextInput="ContactPersonInput_PreviewTextInput"/>
+            </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="5">
+                <TextBlock Style="{StaticResource TextStyle}"
+                           Text="ИНН" />
+                    <xctk:MaskedTextBox x:Name="INNInput" 
+                                        MaxLength="10"
+                                        PreviewTextInput="INNInput_PreviewTextInput"/>
+            </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="5">
+                <TextBlock Style="{StaticResource TextStyle}"
+                           Text="КПП" />
+                    <xctk:MaskedTextBox x:Name="KPPInput"
+                                        MaxLength="10"
+                                        PreviewTextInput="KPPInput_PreviewTextInput"/>
+            </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="5">
+                <TextBlock Style="{StaticResource TextStyle}"
+                           Text="ОКПО" />
+                    <xctk:MaskedTextBox x:Name="OKPOInput" 
+                                        MaxLength="8"
+                                        PreviewTextInput="OKPOInput_PreviewTextInput"/>
+            </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="5">
+                <TextBlock Style="{StaticResource TextStyle}"
+                           Text="Телефонный номер" />
+                <TextBox x:Name="PhoneNumberInput" 
+                         MaxLength="20"
+                         PreviewTextInput="PhoneNumberInput_PreviewTextInput"/>
+            </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="5">
+                    <TextBlock Style="{StaticResource TextStyle}"
+                               Text="Электронная почта" />
+                    <TextBox x:Name="EmailInput" 
+                             MaxLength="100"/>
+                </StackPanel>
+
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="5">
+                    <TextBlock Style="{StaticResource TextStyle}"
+                               Text="Фактический адрес" />
+                    <TextBox x:Name="PhysicalAddressInput"
+                             MaxLength="255"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="5">
+                    <TextBlock Style="{StaticResource TextStyle}"
+                               Text="Юридический адрес" />
+                    <TextBox x:Name="BusinessAddressInput"
+                             MaxLength="255"/>
+                </StackPanel>
+                <GroupBox Header="Банковские реквезиты">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="5">
+                            <TextBlock Style="{StaticResource TextStyle}"
+                                       Text="Наимнование банка" />
+                            <TextBox x:Name="NameBankInput" 
+                                     MaxLength="100"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="5">
+                            <TextBlock Style="{StaticResource TextStyle}"
+                                       Text="БИК" />
+                            <xctk:MaskedTextBox x:Name="BIKInput"
+                                                MaxLength="9"
+                                                PreviewTextInput="BIKInput_PreviewTextInput"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="5">
+                            <TextBlock Style="{StaticResource TextStyle}"
+                                       Text="Корреспондентский счёт" />
+                            <xctk:MaskedTextBox x:Name="CorrespondentAccountInput"
+                                                MaxLength="20"
+                                                PreviewTextInput="CorrespondentAccountInput_PreviewTextInput"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="5">
+                            <TextBlock Style="{StaticResource TextStyle}"
+                                       Text="Расчётный счёт" />
+                            <xctk:MaskedTextBox x:Name="PaymentAccountInput"
+                                                MaxLength="20"
+                                                PreviewTextInput="PaymentAccountInput_PreviewTextInput"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+               
+            </StackPanel>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="BackButton"
+                    Style="{StaticResource MaterialDesignIconButton}"
+                    HorizontalAlignment="Left"
+                    Foreground="#00FF"
+                    Background="#00FF"
+                    BorderBrush="#00FF"
+                    VerticalAlignment="Top"
+                    Margin="5,5,0,0"
+                    Width="30"
+                    Height="30"
+                    Click="BackButton_Click">
+                <materialDesign:PackIcon Kind="ArrowBack"
+                                         Foreground="#111111"
+                                         Width="30"
+                                         Height="30" />
+            </Button>
+            <Button x:Name="SaveButton"
+                    Style="{StaticResource MaterialDesignIconButton}"
+                    HorizontalAlignment="Left"
+                    Foreground="#00FF"
+                    Background="#00FF"
+                    BorderBrush="#00FF"
+                    VerticalAlignment="Top"
+                    Margin="5,5,0,0"
+                    Width="30"
+                    Height="30"
+                    Click="SaveButton_Click">
+                <materialDesign:PackIcon Kind="ContentSave"
+                                         Foreground="#111111"
+                                         Width="30"
+                                         Height="30" />
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

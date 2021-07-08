@@ -1,0 +1,1652 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ONIX_DATABASEModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BankAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CorrespondentAccount" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="BIK" Type="nvarchar" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdRole" Type="int" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="PreviewImage" Type="varbinary(max)" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExpenceInvoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmployee" Type="int" Nullable="false" />
+          <Property Name="IdSaleContract" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExpenceInvoiceSpecification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdGood" Type="int" Nullable="false" />
+          <Property Name="IdExpenceInvoice" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Good">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdManufacturer" Type="int" Nullable="false" />
+          <Property Name="IdCategory" Type="int" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Sertificate" Type="varbinary(max)" />
+          <Property Name="TechnicalDataSheet" Type="varbinary(max)" />
+          <Property Name="Instruction" Type="varbinary(max)" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="PreviewImage" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="GoodNDS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdGood" Type="int" Nullable="false" />
+          <Property Name="NDS" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GoodPrice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdGood" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodeCountry" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdBankAccount" Type="int" Nullable="false" />
+          <Property Name="IdTypeOrganization" Type="int" Nullable="false" />
+          <Property Name="ContactPerson" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="INN" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="KPP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="OKPO" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="PhysicalAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BusinessAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PaymentAccount" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parameter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdGood" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SaleContract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdStatus" Type="int" Nullable="false" />
+          <Property Name="IdEmployee" Type="int" Nullable="false" />
+          <Property Name="IdOrganization" Type="int" />
+          <Property Name="DeliveryAddress" Type="nvarchar(max)" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SaleContractSpecification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdGood" Type="int" Nullable="false" />
+          <Property Name="IdSaleContract" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTypeService" Type="int" Nullable="false" />
+          <Property Name="PreviewImage" Type="varbinary(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceContract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmployee" Type="int" Nullable="false" />
+          <Property Name="IdOrganization" Type="int" Nullable="false" />
+          <Property Name="ServiceAddress" Type="nvarchar(max)" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="DateStart" Type="date" Nullable="false" />
+          <Property Name="DateEnd" Type="date" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="ServiceContractSpecification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdService" Type="int" Nullable="false" />
+          <Property Name="IdServiceContract" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" />
+        </EntityType>
+        <EntityType Name="ServiceNDS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdService" Type="int" Nullable="false" />
+          <Property Name="NDS" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServicePrice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdService" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeOrganization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeService">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Employee__IdRole__4E88ABD4">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ExpenceIn__IdEmp__4F7CD00D">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="ExpenceInvoice" Type="Self.ExpenceInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExpenceInvoice">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ExpenceIn__IdExp__5165187F">
+          <End Role="ExpenceInvoice" Type="Self.ExpenceInvoice" Multiplicity="1" />
+          <End Role="ExpenceInvoiceSpecification" Type="Self.ExpenceInvoiceSpecification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpenceInvoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExpenceInvoiceSpecification">
+              <PropertyRef Name="IdExpenceInvoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ExpenceIn__IdGoo__52593CB8">
+          <End Role="Good" Type="Self.Good" Multiplicity="1" />
+          <End Role="ExpenceInvoiceSpecification" Type="Self.ExpenceInvoiceSpecification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Good">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExpenceInvoiceSpecification">
+              <PropertyRef Name="IdGood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ExpenceIn__IdSal__52593CB8">
+          <End Role="SaleContract" Type="Self.SaleContract" Multiplicity="1" />
+          <End Role="ExpenceInvoice" Type="Self.ExpenceInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SaleContract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExpenceInvoice">
+              <PropertyRef Name="IdSaleContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Good__IdCategory__534D60F1">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Good" Type="Self.Good" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Good">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Good__IdManufact__5441852A">
+          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="1" />
+          <End Role="Good" Type="Self.Good" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Good">
+              <PropertyRef Name="IdManufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GoodNDS__IdGood__5535A963">
+          <End Role="Good" Type="Self.Good" Multiplicity="1" />
+          <End Role="GoodNDS" Type="Self.GoodNDS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Good">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GoodNDS">
+              <PropertyRef Name="IdGood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GoodPrice__IdGoo__5629CD9C">
+          <End Role="Good" Type="Self.Good" Multiplicity="1" />
+          <End Role="GoodPrice" Type="Self.GoodPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Good">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GoodPrice">
+              <PropertyRef Name="IdGood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Manufactu__CodeC__571DF1D5">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Manufacturer">
+              <PropertyRef Name="CodeCountry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Organizat__IdBan__5812160E">
+          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="1" />
+          <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organization">
+              <PropertyRef Name="IdBankAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Organizat__IdTyp__59063A47">
+          <End Role="TypeOrganization" Type="Self.TypeOrganization" Multiplicity="1" />
+          <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOrganization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organization">
+              <PropertyRef Name="IdTypeOrganization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Parameter__IdGoo__59FA5E80">
+          <End Role="Good" Type="Self.Good" Multiplicity="1" />
+          <End Role="Parameter" Type="Self.Parameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Good">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parameter">
+              <PropertyRef Name="IdGood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SaleContr__IdEmp__49C3F6B7">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="SaleContract" Type="Self.SaleContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleContract">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SaleContr__IdGoo__5DCAEF64">
+          <End Role="Good" Type="Self.Good" Multiplicity="1" />
+          <End Role="SaleContractSpecification" Type="Self.SaleContractSpecification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Good">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleContractSpecification">
+              <PropertyRef Name="IdGood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SaleContr__IdOrg__4AB81AF0">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+          <End Role="SaleContract" Type="Self.SaleContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleContract">
+              <PropertyRef Name="IdOrganization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SaleContr__IdSal__06CD04F7">
+          <End Role="SaleContract" Type="Self.SaleContract" Multiplicity="1" />
+          <End Role="SaleContractSpecification" Type="Self.SaleContractSpecification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SaleContract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleContractSpecification">
+              <PropertyRef Name="IdSaleContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SaleContr__IdSta__48CFD27E">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="SaleContract" Type="Self.SaleContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleContract">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Service__IdTypeS__5FB337D6">
+          <End Role="TypeService" Type="Self.TypeService" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeService">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="IdTypeService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__IdEmp__123EB7A3">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="ServiceContract" Type="Self.ServiceContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceContract">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__IdOrg__1332DBDC">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="ServiceContract" Type="Self.ServiceContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceContract">
+              <PropertyRef Name="IdOrganization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__IdSer__160F4887">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceContractSpecification" Type="Self.ServiceContractSpecification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceContractSpecification">
+              <PropertyRef Name="IdService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__IdSer__17036CC0">
+          <End Role="ServiceContract" Type="Self.ServiceContract" Multiplicity="1" />
+          <End Role="ServiceContractSpecification" Type="Self.ServiceContractSpecification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceContract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceContractSpecification">
+              <PropertyRef Name="IdServiceContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceND__IdSer__6477ECF3">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceNDS" Type="Self.ServiceNDS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceNDS">
+              <PropertyRef Name="IdService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServicePr__IdSer__656C112C">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServicePrice" Type="Self.ServicePrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServicePrice">
+              <PropertyRef Name="IdService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ONIX_DATABASEModelContainer">
+          <EntitySet Name="BankAccount" EntityType="Self.BankAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExpenceInvoice" EntityType="Self.ExpenceInvoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExpenceInvoiceSpecification" EntityType="Self.ExpenceInvoiceSpecification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Good" EntityType="Self.Good" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GoodNDS" EntityType="Self.GoodNDS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GoodPrice" EntityType="Self.GoodPrice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parameter" EntityType="Self.Parameter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SaleContract" EntityType="Self.SaleContract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SaleContractSpecification" EntityType="Self.SaleContractSpecification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceContract" EntityType="Self.ServiceContract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceContractSpecification" EntityType="Self.ServiceContractSpecification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceNDS" EntityType="Self.ServiceNDS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServicePrice" EntityType="Self.ServicePrice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOrganization" EntityType="Self.TypeOrganization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeService" EntityType="Self.TypeService" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Employee__IdRole__4E88ABD4" Association="Self.FK__Employee__IdRole__4E88ABD4">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ExpenceIn__IdEmp__4F7CD00D" Association="Self.FK__ExpenceIn__IdEmp__4F7CD00D">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="ExpenceInvoice" EntitySet="ExpenceInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ExpenceIn__IdExp__5165187F" Association="Self.FK__ExpenceIn__IdExp__5165187F">
+            <End Role="ExpenceInvoice" EntitySet="ExpenceInvoice" />
+            <End Role="ExpenceInvoiceSpecification" EntitySet="ExpenceInvoiceSpecification" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ExpenceIn__IdGoo__52593CB8" Association="Self.FK__ExpenceIn__IdGoo__52593CB8">
+            <End Role="Good" EntitySet="Good" />
+            <End Role="ExpenceInvoiceSpecification" EntitySet="ExpenceInvoiceSpecification" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ExpenceIn__IdSal__52593CB8" Association="Self.FK__ExpenceIn__IdSal__52593CB8">
+            <End Role="SaleContract" EntitySet="SaleContract" />
+            <End Role="ExpenceInvoice" EntitySet="ExpenceInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Good__IdCategory__534D60F1" Association="Self.FK__Good__IdCategory__534D60F1">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Good" EntitySet="Good" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Good__IdManufact__5441852A" Association="Self.FK__Good__IdManufact__5441852A">
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+            <End Role="Good" EntitySet="Good" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GoodNDS__IdGood__5535A963" Association="Self.FK__GoodNDS__IdGood__5535A963">
+            <End Role="Good" EntitySet="Good" />
+            <End Role="GoodNDS" EntitySet="GoodNDS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GoodPrice__IdGoo__5629CD9C" Association="Self.FK__GoodPrice__IdGoo__5629CD9C">
+            <End Role="Good" EntitySet="Good" />
+            <End Role="GoodPrice" EntitySet="GoodPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Manufactu__CodeC__571DF1D5" Association="Self.FK__Manufactu__CodeC__571DF1D5">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Organizat__IdBan__5812160E" Association="Self.FK__Organizat__IdBan__5812160E">
+            <End Role="BankAccount" EntitySet="BankAccount" />
+            <End Role="Organization" EntitySet="Organization" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Organizat__IdTyp__59063A47" Association="Self.FK__Organizat__IdTyp__59063A47">
+            <End Role="TypeOrganization" EntitySet="TypeOrganization" />
+            <End Role="Organization" EntitySet="Organization" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Parameter__IdGoo__59FA5E80" Association="Self.FK__Parameter__IdGoo__59FA5E80">
+            <End Role="Good" EntitySet="Good" />
+            <End Role="Parameter" EntitySet="Parameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SaleContr__IdEmp__49C3F6B7" Association="Self.FK__SaleContr__IdEmp__49C3F6B7">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="SaleContract" EntitySet="SaleContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SaleContr__IdGoo__5DCAEF64" Association="Self.FK__SaleContr__IdGoo__5DCAEF64">
+            <End Role="Good" EntitySet="Good" />
+            <End Role="SaleContractSpecification" EntitySet="SaleContractSpecification" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SaleContr__IdOrg__4AB81AF0" Association="Self.FK__SaleContr__IdOrg__4AB81AF0">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="SaleContract" EntitySet="SaleContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SaleContr__IdSal__06CD04F7" Association="Self.FK__SaleContr__IdSal__06CD04F7">
+            <End Role="SaleContract" EntitySet="SaleContract" />
+            <End Role="SaleContractSpecification" EntitySet="SaleContractSpecification" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SaleContr__IdSta__48CFD27E" Association="Self.FK__SaleContr__IdSta__48CFD27E">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="SaleContract" EntitySet="SaleContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Service__IdTypeS__5FB337D6" Association="Self.FK__Service__IdTypeS__5FB337D6">
+            <End Role="TypeService" EntitySet="TypeService" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__IdEmp__123EB7A3" Association="Self.FK__ServiceCo__IdEmp__123EB7A3">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="ServiceContract" EntitySet="ServiceContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__IdOrg__1332DBDC" Association="Self.FK__ServiceCo__IdOrg__1332DBDC">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="ServiceContract" EntitySet="ServiceContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__IdSer__160F4887" Association="Self.FK__ServiceCo__IdSer__160F4887">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceContractSpecification" EntitySet="ServiceContractSpecification" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__IdSer__17036CC0" Association="Self.FK__ServiceCo__IdSer__17036CC0">
+            <End Role="ServiceContract" EntitySet="ServiceContract" />
+            <End Role="ServiceContractSpecification" EntitySet="ServiceContractSpecification" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceND__IdSer__6477ECF3" Association="Self.FK__ServiceND__IdSer__6477ECF3">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceNDS" EntitySet="ServiceNDS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServicePr__IdSer__656C112C" Association="Self.FK__ServicePr__IdSer__656C112C">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServicePrice" EntitySet="ServicePrice" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ONIX_DATABASEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BankAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CorrespondentAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BIK" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK__Organizat__IdBan__5812160E" FromRole="BankAccount" ToRole="Organization" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Good" Relationship="Self.FK__Good__IdCategory__534D60F1" FromRole="Category" ToRole="Good" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK__Manufactu__CodeC__571DF1D5" FromRole="Country" ToRole="Manufacturer" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRole" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PreviewImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Employee__IdRole__4E88ABD4" FromRole="Employee" ToRole="Role" />
+          <NavigationProperty Name="ExpenceInvoice" Relationship="Self.FK__ExpenceIn__IdEmp__4F7CD00D" FromRole="Employee" ToRole="ExpenceInvoice" />
+          <NavigationProperty Name="SaleContract" Relationship="Self.FK__SaleContr__IdEmp__49C3F6B7" FromRole="Employee" ToRole="SaleContract" />
+          <NavigationProperty Name="ServiceContract" Relationship="Self.FK__ServiceCo__IdEmp__123EB7A3" FromRole="Employee" ToRole="ServiceContract" />
+        </EntityType>
+        <EntityType Name="ExpenceInvoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+          <Property Name="IdSaleContract" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__ExpenceIn__IdEmp__4F7CD00D" FromRole="ExpenceInvoice" ToRole="Employee" />
+          <NavigationProperty Name="ExpenceInvoiceSpecification" Relationship="Self.FK__ExpenceIn__IdExp__5165187F" FromRole="ExpenceInvoice" ToRole="ExpenceInvoiceSpecification" />
+          <NavigationProperty Name="SaleContract" Relationship="Self.FK__ExpenceIn__IdSal__52593CB8" FromRole="ExpenceInvoice" ToRole="SaleContract" />
+        </EntityType>
+        <EntityType Name="ExpenceInvoiceSpecification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdGood" Type="Int32" Nullable="false" />
+          <Property Name="IdExpenceInvoice" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ExpenceInvoice" Relationship="Self.FK__ExpenceIn__IdExp__5165187F" FromRole="ExpenceInvoiceSpecification" ToRole="ExpenceInvoice" />
+          <NavigationProperty Name="Good" Relationship="Self.FK__ExpenceIn__IdGoo__52593CB8" FromRole="ExpenceInvoiceSpecification" ToRole="Good" />
+        </EntityType>
+        <EntityType Name="Good">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdManufacturer" Type="Int32" Nullable="false" />
+          <Property Name="IdCategory" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sertificate" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="TechnicalDataSheet" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Instruction" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="PreviewImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Good__IdCategory__534D60F1" FromRole="Good" ToRole="Category" />
+          <NavigationProperty Name="ExpenceInvoiceSpecification" Relationship="Self.FK__ExpenceIn__IdGoo__52593CB8" FromRole="Good" ToRole="ExpenceInvoiceSpecification" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK__Good__IdManufact__5441852A" FromRole="Good" ToRole="Manufacturer" />
+          <NavigationProperty Name="GoodNDS" Relationship="Self.FK__GoodNDS__IdGood__5535A963" FromRole="Good" ToRole="GoodNDS" />
+          <NavigationProperty Name="GoodPrice" Relationship="Self.FK__GoodPrice__IdGoo__5629CD9C" FromRole="Good" ToRole="GoodPrice" />
+          <NavigationProperty Name="Parameter" Relationship="Self.FK__Parameter__IdGoo__59FA5E80" FromRole="Good" ToRole="Parameter" />
+          <NavigationProperty Name="SaleContractSpecification" Relationship="Self.FK__SaleContr__IdGoo__5DCAEF64" FromRole="Good" ToRole="SaleContractSpecification" />
+        </EntityType>
+        <EntityType Name="GoodNDS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdGood" Type="Int32" Nullable="false" />
+          <Property Name="NDS" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Good" Relationship="Self.FK__GoodNDS__IdGood__5535A963" FromRole="GoodNDS" ToRole="Good" />
+        </EntityType>
+        <EntityType Name="GoodPrice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdGood" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Good" Relationship="Self.FK__GoodPrice__IdGoo__5629CD9C" FromRole="GoodPrice" ToRole="Good" />
+        </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodeCountry" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Country" Relationship="Self.FK__Manufactu__CodeC__571DF1D5" FromRole="Manufacturer" ToRole="Country" />
+          <NavigationProperty Name="Good" Relationship="Self.FK__Good__IdManufact__5441852A" FromRole="Manufacturer" ToRole="Good" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBankAccount" Type="Int32" Nullable="false" />
+          <Property Name="IdTypeOrganization" Type="Int32" Nullable="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="INN" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KPP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OKPO" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhysicalAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BusinessAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaymentAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BankAccount" Relationship="Self.FK__Organizat__IdBan__5812160E" FromRole="Organization" ToRole="BankAccount" />
+          <NavigationProperty Name="TypeOrganization" Relationship="Self.FK__Organizat__IdTyp__59063A47" FromRole="Organization" ToRole="TypeOrganization" />
+          <NavigationProperty Name="SaleContract" Relationship="Self.FK__SaleContr__IdOrg__4AB81AF0" FromRole="Organization" ToRole="SaleContract" />
+          <NavigationProperty Name="ServiceContract" Relationship="Self.FK__ServiceCo__IdOrg__1332DBDC" FromRole="Organization" ToRole="ServiceContract" />
+        </EntityType>
+        <EntityType Name="Parameter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdGood" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Good" Relationship="Self.FK__Parameter__IdGoo__59FA5E80" FromRole="Parameter" ToRole="Good" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__IdRole__4E88ABD4" FromRole="Role" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="SaleContract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdStatus" Type="Int32" Nullable="false" />
+          <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+          <Property Name="IdOrganization" Type="Int32" />
+          <Property Name="DeliveryAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__SaleContr__IdEmp__49C3F6B7" FromRole="SaleContract" ToRole="Employee" />
+          <NavigationProperty Name="ExpenceInvoice" Relationship="Self.FK__ExpenceIn__IdSal__52593CB8" FromRole="SaleContract" ToRole="ExpenceInvoice" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK__SaleContr__IdOrg__4AB81AF0" FromRole="SaleContract" ToRole="Organization" />
+          <NavigationProperty Name="SaleContractSpecification" Relationship="Self.FK__SaleContr__IdSal__06CD04F7" FromRole="SaleContract" ToRole="SaleContractSpecification" />
+          <NavigationProperty Name="Status" Relationship="Self.FK__SaleContr__IdSta__48CFD27E" FromRole="SaleContract" ToRole="Status" />
+        </EntityType>
+        <EntityType Name="SaleContractSpecification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdGood" Type="Int32" Nullable="false" />
+          <Property Name="IdSaleContract" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Good" Relationship="Self.FK__SaleContr__IdGoo__5DCAEF64" FromRole="SaleContractSpecification" ToRole="Good" />
+          <NavigationProperty Name="SaleContract" Relationship="Self.FK__SaleContr__IdSal__06CD04F7" FromRole="SaleContractSpecification" ToRole="SaleContract" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTypeService" Type="Int32" Nullable="false" />
+          <Property Name="PreviewImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TypeService" Relationship="Self.FK__Service__IdTypeS__5FB337D6" FromRole="Service" ToRole="TypeService" />
+          <NavigationProperty Name="ServiceContractSpecification" Relationship="Self.FK__ServiceCo__IdSer__160F4887" FromRole="Service" ToRole="ServiceContractSpecification" />
+          <NavigationProperty Name="ServiceNDS" Relationship="Self.FK__ServiceND__IdSer__6477ECF3" FromRole="Service" ToRole="ServiceNDS" />
+          <NavigationProperty Name="ServicePrice" Relationship="Self.FK__ServicePr__IdSer__656C112C" FromRole="Service" ToRole="ServicePrice" />
+        </EntityType>
+        <EntityType Name="ServiceContract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+          <Property Name="IdOrganization" Type="Int32" Nullable="false" />
+          <Property Name="ServiceAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__ServiceCo__IdEmp__123EB7A3" FromRole="ServiceContract" ToRole="Employee" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK__ServiceCo__IdOrg__1332DBDC" FromRole="ServiceContract" ToRole="Organization" />
+          <NavigationProperty Name="ServiceContractSpecification" Relationship="Self.FK__ServiceCo__IdSer__17036CC0" FromRole="ServiceContract" ToRole="ServiceContractSpecification" />
+        </EntityType>
+        <EntityType Name="ServiceContractSpecification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdService" Type="Int32" Nullable="false" />
+          <Property Name="IdServiceContract" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__ServiceCo__IdSer__160F4887" FromRole="ServiceContractSpecification" ToRole="Service" />
+          <NavigationProperty Name="ServiceContract" Relationship="Self.FK__ServiceCo__IdSer__17036CC0" FromRole="ServiceContractSpecification" ToRole="ServiceContract" />
+        </EntityType>
+        <EntityType Name="ServiceNDS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdService" Type="Int32" Nullable="false" />
+          <Property Name="NDS" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__ServiceND__IdSer__6477ECF3" FromRole="ServiceNDS" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="ServicePrice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdService" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__ServicePr__IdSer__656C112C" FromRole="ServicePrice" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="SaleContract" Relationship="Self.FK__SaleContr__IdSta__48CFD27E" FromRole="Status" ToRole="SaleContract" />
+        </EntityType>
+        <EntityType Name="TypeOrganization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK__Organizat__IdTyp__59063A47" FromRole="TypeOrganization" ToRole="Organization" />
+        </EntityType>
+        <EntityType Name="TypeService">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__Service__IdTypeS__5FB337D6" FromRole="TypeService" ToRole="Service" />
+        </EntityType>
+        <Association Name="FK__Organizat__IdBan__5812160E">
+          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="1" />
+          <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organization">
+              <PropertyRef Name="IdBankAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Good__IdCategory__534D60F1">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Good" Type="Self.Good" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Good">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Manufactu__CodeC__571DF1D5">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Manufacturer">
+              <PropertyRef Name="CodeCountry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__IdRole__4E88ABD4">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ExpenceIn__IdEmp__4F7CD00D">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="ExpenceInvoice" Type="Self.ExpenceInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExpenceInvoice">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SaleContr__IdEmp__49C3F6B7">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="SaleContract" Type="Self.SaleContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleContract">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__IdEmp__123EB7A3">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="ServiceContract" Type="Self.ServiceContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceContract">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ExpenceIn__IdExp__5165187F">
+          <End Role="ExpenceInvoice" Type="Self.ExpenceInvoice" Multiplicity="1" />
+          <End Role="ExpenceInvoiceSpecification" Type="Self.ExpenceInvoiceSpecification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpenceInvoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExpenceInvoiceSpecification">
+              <PropertyRef Name="IdExpenceInvoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ExpenceIn__IdSal__52593CB8">
+          <End Role="SaleContract" Type="Self.SaleContract" Multiplicity="1" />
+          <End Role="ExpenceInvoice" Type="Self.ExpenceInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SaleContract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExpenceInvoice">
+              <PropertyRef Name="IdSaleContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ExpenceIn__IdGoo__52593CB8">
+          <End Role="Good" Type="Self.Good" Multiplicity="1" />
+          <End Role="ExpenceInvoiceSpecification" Type="Self.ExpenceInvoiceSpecification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Good">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExpenceInvoiceSpecification">
+              <PropertyRef Name="IdGood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Good__IdManufact__5441852A">
+          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="1" />
+          <End Role="Good" Type="Self.Good" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Good">
+              <PropertyRef Name="IdManufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GoodNDS__IdGood__5535A963">
+          <End Role="Good" Type="Self.Good" Multiplicity="1" />
+          <End Role="GoodNDS" Type="Self.GoodNDS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Good">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GoodNDS">
+              <PropertyRef Name="IdGood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GoodPrice__IdGoo__5629CD9C">
+          <End Role="Good" Type="Self.Good" Multiplicity="1" />
+          <End Role="GoodPrice" Type="Self.GoodPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Good">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GoodPrice">
+              <PropertyRef Name="IdGood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Parameter__IdGoo__59FA5E80">
+          <End Role="Good" Type="Self.Good" Multiplicity="1" />
+          <End Role="Parameter" Type="Self.Parameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Good">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parameter">
+              <PropertyRef Name="IdGood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SaleContr__IdGoo__5DCAEF64">
+          <End Role="Good" Type="Self.Good" Multiplicity="1" />
+          <End Role="SaleContractSpecification" Type="Self.SaleContractSpecification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Good">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleContractSpecification">
+              <PropertyRef Name="IdGood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Organizat__IdTyp__59063A47">
+          <End Role="TypeOrganization" Type="Self.TypeOrganization" Multiplicity="1" />
+          <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOrganization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organization">
+              <PropertyRef Name="IdTypeOrganization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SaleContr__IdOrg__4AB81AF0">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+          <End Role="SaleContract" Type="Self.SaleContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleContract">
+              <PropertyRef Name="IdOrganization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__IdOrg__1332DBDC">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="ServiceContract" Type="Self.ServiceContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceContract">
+              <PropertyRef Name="IdOrganization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SaleContr__IdSal__06CD04F7">
+          <End Role="SaleContract" Type="Self.SaleContract" Multiplicity="1" />
+          <End Role="SaleContractSpecification" Type="Self.SaleContractSpecification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SaleContract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleContractSpecification">
+              <PropertyRef Name="IdSaleContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SaleContr__IdSta__48CFD27E">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="SaleContract" Type="Self.SaleContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleContract">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Service__IdTypeS__5FB337D6">
+          <End Role="TypeService" Type="Self.TypeService" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeService">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="IdTypeService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__IdSer__160F4887">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceContractSpecification" Type="Self.ServiceContractSpecification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceContractSpecification">
+              <PropertyRef Name="IdService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceND__IdSer__6477ECF3">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceNDS" Type="Self.ServiceNDS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceNDS">
+              <PropertyRef Name="IdService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServicePr__IdSer__656C112C">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServicePrice" Type="Self.ServicePrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServicePrice">
+              <PropertyRef Name="IdService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__IdSer__17036CC0">
+          <End Role="ServiceContract" Type="Self.ServiceContract" Multiplicity="1" />
+          <End Role="ServiceContractSpecification" Type="Self.ServiceContractSpecification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceContract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceContractSpecification">
+              <PropertyRef Name="IdServiceContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ONIX_DATABASEEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BankAccount" EntityType="Self.BankAccount" />
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Country" EntityType="Self.Country" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="ExpenceInvoice" EntityType="Self.ExpenceInvoice" />
+          <EntitySet Name="ExpenceInvoiceSpecification" EntityType="Self.ExpenceInvoiceSpecification" />
+          <EntitySet Name="Good" EntityType="Self.Good" />
+          <EntitySet Name="GoodNDS" EntityType="Self.GoodNDS" />
+          <EntitySet Name="GoodPrice" EntityType="Self.GoodPrice" />
+          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
+          <EntitySet Name="Organization" EntityType="Self.Organization" />
+          <EntitySet Name="Parameter" EntityType="Self.Parameter" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="SaleContract" EntityType="Self.SaleContract" />
+          <EntitySet Name="SaleContractSpecification" EntityType="Self.SaleContractSpecification" />
+          <EntitySet Name="Service" EntityType="Self.Service" />
+          <EntitySet Name="ServiceContract" EntityType="Self.ServiceContract" />
+          <EntitySet Name="ServiceContractSpecification" EntityType="Self.ServiceContractSpecification" />
+          <EntitySet Name="ServiceNDS" EntityType="Self.ServiceNDS" />
+          <EntitySet Name="ServicePrice" EntityType="Self.ServicePrice" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="TypeOrganization" EntityType="Self.TypeOrganization" />
+          <EntitySet Name="TypeService" EntityType="Self.TypeService" />
+          <AssociationSet Name="FK__Organizat__IdBan__5812160E" Association="Self.FK__Organizat__IdBan__5812160E">
+            <End Role="BankAccount" EntitySet="BankAccount" />
+            <End Role="Organization" EntitySet="Organization" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Good__IdCategory__534D60F1" Association="Self.FK__Good__IdCategory__534D60F1">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Good" EntitySet="Good" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Manufactu__CodeC__571DF1D5" Association="Self.FK__Manufactu__CodeC__571DF1D5">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__IdRole__4E88ABD4" Association="Self.FK__Employee__IdRole__4E88ABD4">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ExpenceIn__IdEmp__4F7CD00D" Association="Self.FK__ExpenceIn__IdEmp__4F7CD00D">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="ExpenceInvoice" EntitySet="ExpenceInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SaleContr__IdEmp__49C3F6B7" Association="Self.FK__SaleContr__IdEmp__49C3F6B7">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="SaleContract" EntitySet="SaleContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__IdEmp__123EB7A3" Association="Self.FK__ServiceCo__IdEmp__123EB7A3">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="ServiceContract" EntitySet="ServiceContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ExpenceIn__IdExp__5165187F" Association="Self.FK__ExpenceIn__IdExp__5165187F">
+            <End Role="ExpenceInvoice" EntitySet="ExpenceInvoice" />
+            <End Role="ExpenceInvoiceSpecification" EntitySet="ExpenceInvoiceSpecification" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ExpenceIn__IdSal__52593CB8" Association="Self.FK__ExpenceIn__IdSal__52593CB8">
+            <End Role="SaleContract" EntitySet="SaleContract" />
+            <End Role="ExpenceInvoice" EntitySet="ExpenceInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ExpenceIn__IdGoo__52593CB8" Association="Self.FK__ExpenceIn__IdGoo__52593CB8">
+            <End Role="Good" EntitySet="Good" />
+            <End Role="ExpenceInvoiceSpecification" EntitySet="ExpenceInvoiceSpecification" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Good__IdManufact__5441852A" Association="Self.FK__Good__IdManufact__5441852A">
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+            <End Role="Good" EntitySet="Good" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GoodNDS__IdGood__5535A963" Association="Self.FK__GoodNDS__IdGood__5535A963">
+            <End Role="Good" EntitySet="Good" />
+            <End Role="GoodNDS" EntitySet="GoodNDS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GoodPrice__IdGoo__5629CD9C" Association="Self.FK__GoodPrice__IdGoo__5629CD9C">
+            <End Role="Good" EntitySet="Good" />
+            <End Role="GoodPrice" EntitySet="GoodPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Parameter__IdGoo__59FA5E80" Association="Self.FK__Parameter__IdGoo__59FA5E80">
+            <End Role="Good" EntitySet="Good" />
+            <End Role="Parameter" EntitySet="Parameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SaleContr__IdGoo__5DCAEF64" Association="Self.FK__SaleContr__IdGoo__5DCAEF64">
+            <End Role="Good" EntitySet="Good" />
+            <End Role="SaleContractSpecification" EntitySet="SaleContractSpecification" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Organizat__IdTyp__59063A47" Association="Self.FK__Organizat__IdTyp__59063A47">
+            <End Role="TypeOrganization" EntitySet="TypeOrganization" />
+            <End Role="Organization" EntitySet="Organization" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SaleContr__IdOrg__4AB81AF0" Association="Self.FK__SaleContr__IdOrg__4AB81AF0">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="SaleContract" EntitySet="SaleContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__IdOrg__1332DBDC" Association="Self.FK__ServiceCo__IdOrg__1332DBDC">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="ServiceContract" EntitySet="ServiceContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SaleContr__IdSal__06CD04F7" Association="Self.FK__SaleContr__IdSal__06CD04F7">
+            <End Role="SaleContract" EntitySet="SaleContract" />
+            <End Role="SaleContractSpecification" EntitySet="SaleContractSpecification" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SaleContr__IdSta__48CFD27E" Association="Self.FK__SaleContr__IdSta__48CFD27E">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="SaleContract" EntitySet="SaleContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Service__IdTypeS__5FB337D6" Association="Self.FK__Service__IdTypeS__5FB337D6">
+            <End Role="TypeService" EntitySet="TypeService" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__IdSer__160F4887" Association="Self.FK__ServiceCo__IdSer__160F4887">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceContractSpecification" EntitySet="ServiceContractSpecification" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceND__IdSer__6477ECF3" Association="Self.FK__ServiceND__IdSer__6477ECF3">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceNDS" EntitySet="ServiceNDS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServicePr__IdSer__656C112C" Association="Self.FK__ServicePr__IdSer__656C112C">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServicePrice" EntitySet="ServicePrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__IdSer__17036CC0" Association="Self.FK__ServiceCo__IdSer__17036CC0">
+            <End Role="ServiceContract" EntitySet="ServiceContract" />
+            <End Role="ServiceContractSpecification" EntitySet="ServiceContractSpecification" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ONIX_DATABASEModelContainer" CdmEntityContainer="ONIX_DATABASEEntities">
+          <EntitySetMapping Name="BankAccount">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.BankAccount">
+              <MappingFragment StoreEntitySet="BankAccount">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CorrespondentAccount" ColumnName="CorrespondentAccount" />
+                <ScalarProperty Name="BIK" ColumnName="BIK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PreviewImage" ColumnName="PreviewImage" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpenceInvoice">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.ExpenceInvoice">
+              <MappingFragment StoreEntitySet="ExpenceInvoice">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="IdSaleContract" ColumnName="IdSaleContract" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpenceInvoiceSpecification">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.ExpenceInvoiceSpecification">
+              <MappingFragment StoreEntitySet="ExpenceInvoiceSpecification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdGood" ColumnName="IdGood" />
+                <ScalarProperty Name="IdExpenceInvoice" ColumnName="IdExpenceInvoice" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Good">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.Good">
+              <MappingFragment StoreEntitySet="Good">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdManufacturer" ColumnName="IdManufacturer" />
+                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Sertificate" ColumnName="Sertificate" />
+                <ScalarProperty Name="TechnicalDataSheet" ColumnName="TechnicalDataSheet" />
+                <ScalarProperty Name="Instruction" ColumnName="Instruction" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="PreviewImage" ColumnName="PreviewImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoodNDS">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.GoodNDS">
+              <MappingFragment StoreEntitySet="GoodNDS">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdGood" ColumnName="IdGood" />
+                <ScalarProperty Name="NDS" ColumnName="NDS" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoodPrice">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.GoodPrice">
+              <MappingFragment StoreEntitySet="GoodPrice">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdGood" ColumnName="IdGood" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manufacturer">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.Manufacturer">
+              <MappingFragment StoreEntitySet="Manufacturer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CodeCountry" ColumnName="CodeCountry" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organization">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.Organization">
+              <MappingFragment StoreEntitySet="Organization">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdBankAccount" ColumnName="IdBankAccount" />
+                <ScalarProperty Name="IdTypeOrganization" ColumnName="IdTypeOrganization" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="KPP" ColumnName="KPP" />
+                <ScalarProperty Name="OKPO" ColumnName="OKPO" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhysicalAddress" ColumnName="PhysicalAddress" />
+                <ScalarProperty Name="BusinessAddress" ColumnName="BusinessAddress" />
+                <ScalarProperty Name="PaymentAccount" ColumnName="PaymentAccount" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parameter">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.Parameter">
+              <MappingFragment StoreEntitySet="Parameter">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdGood" ColumnName="IdGood" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SaleContract">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.SaleContract">
+              <MappingFragment StoreEntitySet="SaleContract">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="IdOrganization" ColumnName="IdOrganization" />
+                <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SaleContractSpecification">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.SaleContractSpecification">
+              <MappingFragment StoreEntitySet="SaleContractSpecification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdGood" ColumnName="IdGood" />
+                <ScalarProperty Name="IdSaleContract" ColumnName="IdSaleContract" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdTypeService" ColumnName="IdTypeService" />
+                <ScalarProperty Name="PreviewImage" ColumnName="PreviewImage" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceContract">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.ServiceContract">
+              <MappingFragment StoreEntitySet="ServiceContract">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="IdOrganization" ColumnName="IdOrganization" />
+                <ScalarProperty Name="ServiceAddress" ColumnName="ServiceAddress" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceContractSpecification">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.ServiceContractSpecification">
+              <MappingFragment StoreEntitySet="ServiceContractSpecification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdService" ColumnName="IdService" />
+                <ScalarProperty Name="IdServiceContract" ColumnName="IdServiceContract" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceNDS">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.ServiceNDS">
+              <MappingFragment StoreEntitySet="ServiceNDS">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdService" ColumnName="IdService" />
+                <ScalarProperty Name="NDS" ColumnName="NDS" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServicePrice">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.ServicePrice">
+              <MappingFragment StoreEntitySet="ServicePrice">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdService" ColumnName="IdService" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOrganization">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.TypeOrganization">
+              <MappingFragment StoreEntitySet="TypeOrganization">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeService">
+            <EntityTypeMapping TypeName="ONIX_DATABASEModel.TypeService">
+              <MappingFragment StoreEntitySet="TypeService">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

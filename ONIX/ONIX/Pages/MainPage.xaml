@@ -1,0 +1,172 @@
+﻿<Page x:Class="ONIX.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ONIX.Pages"
+      mc:Ignorable="d"
+      xmlns:Wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="545" d:DesignWidth="1010"
+      Loaded="Page_Loaded"
+      Title="Деятельность организации">
+
+    <Grid>
+        <Grid x:Name="ReportGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <materialDesign:Card Margin="5"
+                                     Height="170"
+                                     Width="325">
+                    <materialDesign:Card.Background>
+                        <LinearGradientBrush EndPoint="0.5,1"
+                                             StartPoint="0.5,0">
+                            <GradientStop Color="#FFD89B65"
+                                          Offset="1" />
+                            <GradientStop Color="#ED3F3C" />
+                        </LinearGradientBrush>
+                    </materialDesign:Card.Background>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Style="{StaticResource TextStyle}"
+                                   Text="Выбор диапазона"
+                                   Width="Auto"
+                                   Foreground="#DDF9F9F9"
+                                   FontSize="25"
+                                   Height="Auto" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource TextStyle}"
+                                       Text="Период с"
+                                       Width="80"
+                                       Foreground="#DDF9F9F9"
+                                       Height="Auto" />
+                            <DatePicker x:Name="DateFrom"
+                                        SelectedDateChanged="DateFrom_SelectedDateChanged"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource TextStyle}"
+                                       Text="Период по"
+                                       Width="80"
+                                       Foreground="#DDF9F9F9"
+                                       Height="Auto" />
+                            <DatePicker x:Name="DateTo"
+                                        SelectedDateChanged="DateTo_SelectedDateChanged"/>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:Card>
+                <materialDesign:Card Margin="5"
+                                     Height="170"
+                                     Width="325">
+                    <materialDesign:Card.Background>
+                        <LinearGradientBrush EndPoint="0.5,1"
+                                             StartPoint="0.5,0">
+                            <GradientStop Color="#FFD89B65"
+                                          Offset="1" />
+                            <GradientStop Color="#ED3F3C" />
+                        </LinearGradientBrush>
+                    </materialDesign:Card.Background>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Style="{StaticResource TextStyle}"
+                                   Text="Общая прибыль"
+                                   Width="Auto"
+                                   Foreground="#DDF9F9F9"
+                                   FontSize="25"
+                                   Height="Auto" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource TextStyle}"
+                                       x:Name="TotalProfitText"
+                                       Width="Auto"
+                                       Foreground="#DDF9F9F9"
+                                       FontSize="25"
+                                       Height="Auto" />
+                        </StackPanel>
+                        <TextBlock Style="{StaticResource TextStyle}"
+                                   Text="Данные актуальны"
+                                   Width="Auto"
+                                   Foreground="#DDF9F9F9"
+                                   Height="Auto" />
+                    </StackPanel>
+                </materialDesign:Card>
+                <materialDesign:Card Margin="5"
+                                     Height="170"
+                                     Width="325">
+                    <materialDesign:Card.Background>
+                        <LinearGradientBrush EndPoint="0.5,1"
+                                             StartPoint="0.5,0">
+                            <GradientStop Color="#FFD89B65"
+                                          Offset="1" />
+                            <GradientStop Color="#ED3F3C" />
+                        </LinearGradientBrush>
+                    </materialDesign:Card.Background>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Style="{StaticResource TextStyle}"
+                                   Text="Прибыль по товарам"
+                                   Width="Auto"
+                                   Foreground="#DDF9F9F9"
+                                   FontSize="25"
+                                   Height="Auto" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource TextStyle}"
+                                      x:Name="GoodProfitText"
+                                       Width="Auto"
+                                       Foreground="#DDF9F9F9"
+                                       FontSize="25"
+                                       Height="Auto" />
+                        </StackPanel>
+                        <TextBlock Style="{StaticResource TextStyle}"
+                                   Text="Данные актуальны"
+                                   Width="Auto"
+                                   Foreground="#DDF9F9F9"
+                                   Height="Auto" />
+                    </StackPanel>
+                </materialDesign:Card>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="1">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Style="{StaticResource TextStyle}"
+                               Text="Количество успешных сделок по продажам товаров"
+                               Height="Auto"
+                               Width="Auto"
+                               HorizontalAlignment="Center" />
+                    <Wpf:CartesianChart Width="700"
+                                        Height="290"
+                                        x:Name="CartesianChartDiagram"
+                                        HorizontalAlignment="Left"
+                                        LegendLocation="Right" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Style="{StaticResource TextStyle}"
+                               Text="Самые продаваемые товары"
+                               Height="Auto"
+                               Width="Auto"
+                               HorizontalAlignment="Center"/>
+                    <Wpf:PieChart LegendLocation="None"
+                                  x:Name="PieChartDiagram"
+                                  Width="290"
+                                  Height="290">
+                        <Wpf:PieChart.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Топ 3 продаваемых товаров"
+                                          x:Name="TopThreeItem"
+                                          Click="TopThreeItem_Click" />
+                                <MenuItem Header="Топ 5 продаваемых товаров"
+                                          x:Name="TopFiveItem"
+                                          Click="TopFiveItem_Click" />
+                                <MenuItem Header="Топ 10 продаваемых товаров"
+                                          x:Name="TopTenItem"
+                                          Click="TopTenItem_Click" />
+                            </ContextMenu>
+                        </Wpf:PieChart.ContextMenu>
+                    </Wpf:PieChart>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
